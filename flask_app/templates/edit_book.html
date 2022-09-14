@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <title>{{book_to_edit.title}}</title>
+</head>
+<body class="bg-dark text-white">
+    <header class="d-flex justify-content-around align-items-center">
+        <p class="display-1">Edit Book</p>
+        <a href="/dashboard" class="text-info">Dashboard</a>
+        <a href="/logout" class="text-info">Logout</a>
+    </header>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="text-warning text-center">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/edit_book/{{book_to_edit.id}}" method="post" class="d-flex justify-content-center">
+        <div class="d-flex flex-xl-column align-items-end">
+            <input type="hidden" name="id" value={{book_to_edit.id}}>
+            <label>
+                Title:
+                <input type="text" name="title" value="{{book_to_edit.title}}">
+            </label>
+            <label>
+                Author:
+                <input type="text" name="author" value="{{book_to_edit.author}}">
+            </label>
+            <label>
+                Description:
+                <textarea name="description" cols="23" rows="5">{{book_to_edit.description}}</textarea>
+            </label>
+            <button class="btn bg-secondary text-info">Update</button>
+        </div>
+    </form>
+</body>
+</html>
