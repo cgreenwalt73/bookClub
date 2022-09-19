@@ -62,6 +62,11 @@ class Book:
     def delete_book(cls, id):
         data= {'id' : id}
         query="""
+        DELETE FROM comments
+        WHERE book_id = %(id)s;
+        ;"""
+        connectToMySQL(cls.db).query_db(query, data)
+        query="""
         DELETE FROM books 
         WHERE books.id= %(id)s
         ;"""
